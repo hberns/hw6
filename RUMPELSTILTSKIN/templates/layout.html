@@ -3,10 +3,28 @@
 <!doctype html>
 <html>
     <head>
-        <title>RUMPELSTILTSKIN</title>
+        <link rel="stylesheet" href="style2.css">
+        <title>madlib</title>
     </head>
-
     <body>
+        <form action="{{ url_for('GET_Example') }}" method="GET">
+        <div>
+            <label> Amazon: </label>
+            <input class=am type="submit" size=3 name="id" value=1>
+        </div>
+        <div>
+            <label> Apple: </label>
+            <input class=ap type="submit" size=3 name="id" value=2>
+        </div>
+        <div>
+            <label> Netflix: </label>
+            <input class=ne type="submit" size=3 name="id" value=3>
+        </div>
+            <div>
+            <label> Tesla: </label>
+            <input class=te type="submit" size=3 name="id" value=4>
+        </div>
+        </form>
         {% block body %}
         {% endblock %}
     </body>

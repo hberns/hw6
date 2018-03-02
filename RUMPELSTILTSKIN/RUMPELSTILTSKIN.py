@@ -58,18 +58,16 @@ def close_db(error):
         g.sqlite_db.close()
 
 ##### ROUTES #####
+@app.route('/')
+def Layout():
+    return render_template('layout.html')
 
-@app.route('/get_example')
+@app.route('/madlib', methods=['POST', 'GET'])
 def GET_Example() :
     db = get_db()
-    cur = db.execute('SELECT first_name, last_name, age FROM users ORDER BY id DESC')
-    the_users = cur.fetchall()
-    return render_template('get_example.html', entries=the_users)
+    id=request.args.get('id')
+    cur = db.execute('SELECT BusinessName, BusinessType, MarketType, Jobtobedone, RevenueModel FROM madlib WHERE id=(?)',id)
+    mad = cur.fetchall()
+    return render_template('get_example.html', madlib=mad)
 
-@app.route('/post_example', methods=['POST'])
-def POST_Example():
-    db = get_db()
-    db.execute('INSERT INTO users (first_name, last_name, age) VALUES (?, ?, ?)',
-                 [request.form['first'], request.form['last'], request.form['age']])
-    db.commit()
-    return redirect('/get_example')
+
